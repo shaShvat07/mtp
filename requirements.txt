@@ -6,4 +6,6 @@ scipy
 h5py
 hdf5storage
 tqdm
-
+numpy<2.0.0
+matplotlib
+torchinfo
