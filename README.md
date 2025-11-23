@@ -11,6 +11,20 @@ The project is divided into two main modules:
     * Converts RGB images to HSI using the trained MST++ model.
     * Visualizes the disease annotation on both the original RGB and the reconstructed HSI.
 
+## Visuals 
+* RGB TO HSI
+  
+![Alt text](https://github.com/shaShvat07/mtp/blob/main/HSI%20image%20demo.png)
+
+* Annotations 
+
+![Alt text](https://github.com/shaShvat07/mtp/blob/main/annotation_rgb_and_hsi.png)
+
+* Training loss v/s iterations
+
+![Alt text](https://github.com/shaShvat07/mtp/blob/main/lossVsiteration.png)
+
+
 ## 🛠️ Getting Started
 
 ### Prerequisites
@@ -104,3 +118,4 @@ This project implements the **MST++** architecture. If you use this code or mode
 In *CVPR Workshops (CVPRW)*, 2022.
 
 [[Paper Link]](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Cai_MST_Multi-Stage_Spectral-Wise_Transformer_for_Efficient_Spectral_Reconstruction_CVPRW_2022_paper.pdf)
+
