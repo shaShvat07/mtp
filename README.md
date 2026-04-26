@@ -1,15 +1,25 @@
+## Getting Started
+
+### Prerequisites
+- Python 3.8
+- CUDA-capable GPU (10GB+ VRAM recommended)
+
+### Installation
+
+```bash
+git clone https://github.com/shaShvat07/mtp.git
+cd mtp
+pip install -r requirements.txt
+```
+
+---
+
+
 # MST++ Implementation and Annotation for Plant Disease Detection
 
 This repository contains an implementation of the **MST++ (Multi-stage Spectral-wise Transformer)** for spectral reconstruction, applied to a potato leaf disease dataset. The project pipeline includes training the spectral reconstruction model and a comprehensive inference workflow that annotates RGB images, converts them to Hyperspectral Images (HSI), and visualizes bounding box annotations on both modalities.
 
 ## 📌 Project Overview
-
-The project is divided into two main modules:
-1. **Training (`training/`)**: Trains the MST++ model to reconstruct hyperspectral information from RGB images using the ARAD-1K dataset.
-2. **Annotation & Inference (`rgb_to_hsi/`)**: 
-    * Annotates RGB potato leaf images to generate bounding box coordinates.
-    * Converts RGB images to HSI using the trained MST++ model.
-    * Visualizes the disease annotation on both the original RGB and the reconstructed HSI.
 
 ## Visuals 
 * RGB TO HSI
@@ -25,97 +35,56 @@ The project is divided into two main modules:
 ![Alt text](https://github.com/shaShvat07/mtp/blob/main/lossVsiteration.png)
 
 
-## 🛠️ Getting Started
-
-### Prerequisites
-* **Python 3.8** is strictly required.
-* **Git**
-
-### Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/shaShvat07/mtp.git
-   cd mtp
-   ```
-
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
----
-
-## 📂 Dataset Structure
-
-Ensure your datasets are organized as follows before running the scripts. The project uses the **ARAD-1K** dataset for spectral training and the **New Plant Diseases Dataset (Potato)** from Kaggle for disease annotation.
-
-```
-├── mst_plus_plus
-│   └── dataset
-│       ├── split_txt
-│       ├── Test_RGB
-│       ├── Train_RGB
-│       └── Train_Spec
-│
-└── potato-dataset
-    ├── Potato___Early_blight
-    ├── Potato___healthy
-    └── Potato___Late_blight
-```
-
----
-
 ## 🚀 Usage Guide
 
-### 1. Training the Model
+### Training the MST++ Model
 
 To train the MST++ spectral reconstruction model:
 
 1. Navigate to the training directory:
    ```
-   cd training
+   cd mst_plus_plus_training
    ```
 2. Open the Jupyter Notebook located in this folder.
 3. Run **all cells** sequentially to start the training process.
 4. Once training is complete, the best model checkpoint (`.pth` file) will be tell by the code, you need to copy it from the checkpoints.
 
-### 2. Annotation and RGB-to-HSI Conversion
 
-This module handles the annotation of disease spots, generation of coordinate labels, and spectral reconstruction.
+## Running the Pipeline
 
-**Preparation:**
-1. Copy the **best model file** (`.pth`) generated from the training step.
-2. Paste it into the `best_model/` directory inside `rgb_to_hsi`.
+### Step 1 — Train MST++ for Spectral Reconstruction
+```bash
+cd "mst_plus_plus_training"
+jupyter notebook
+```
+Run all cells sequentially. Copy the best `.pth` checkpoint into `best_model/` when training completes.
 
-**Execution:**
-1. Navigate to the directory:
-   ```
-   cd rgb_to_hsi
-   ```
-2. Run the main notebook:
-   ```
-   jupyter notebook index.ipynb
-   ```
-3. **Manual Input Required:** During execution, you will be prompted to enter:
-   * The file path location of the input dataset.
-   * The directory path where you want to store the output.
+### Step 2 — Convert RGB Dataset to HSI
+```bash
+jupyter notebook rgb_to_hsi_pipeline.ipynb
+```
+You will be prompted to enter the input dataset path and the output directory path. The notebook will convert all RGB images to 31-channel `.mat` hyperspectral datacubes.
 
-**What this script does:**
-* **Annotates** the RGB image and generates bounding box coordinates.
-* **Saves** these coordinates into a `.txt` file with corresponding labels.
-* **Converts** the RGB image to an HSI image using the pre-trained MST++ model.
-* **Visualizes** the bounding box annotations overlaid on both the original RGB image and the reconstructed HSI image.
+> Note: Peak GPU memory during conversion can reach up to 33GB. Patch-based sliding window inference and mixed precision (FP16) are used automatically to manage memory.
+
+### Step 3 — Train RGB Classifier
+Open and run `index.ipynb` with the RGB dataset path configured. Best weights are saved automatically as `best_efficientnet_plant_disease.pth`.
+
+### Step 4 — Train HSI Classifier
+```bash
+jupyter notebook index_hsi.ipynb
+```
+Point the dataset path to your converted HSI `.mat` directory. Best weights are saved as `best_plant_hsi_disease.pth`. Training supports seamless resumption from interruptions via epoch-level checkpointing.
 
 ---
 
-## 📄 References & Citation
+## References
 
-This project implements the **MST++** architecture. If you use this code or model, please credit the original paper:
+**MST++: Multi-stage Spectral-wise Transformer for Efficient Spectral Reconstruction**
+Cai et al., CVPR Workshops 2022.
+[Paper](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Cai_MST_Multi-Stage_Spectral-Wise_Transformer_for_Efficient_Spectral_Reconstruction_CVPRW_2022_paper.pdf)
 
-**MST++: Multi-stage Spectral-wise Transformer for Efficient Spectral Reconstruction**  
-*Yuanhao Cai, Jing Lin, Haoqian Wang, Qijing Li, Huaian Chen, Lei Zhang, Radu Timofte, Luc Van Gool*  
-In *CVPR Workshops (CVPRW)*, 2022.
+**PlantVillage Dataset** — Hughes & Salathé, arXiv 2015.
 
-[[Paper Link]](https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Cai_MST_Multi-Stage_Spectral-Wise_Transformer_for_Efficient_Spectral_Reconstruction_CVPRW_2022_paper.pdf)
+**EfficientNet** — Tan & Le, ICML 2019.
 
