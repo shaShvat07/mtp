@@ -26,10 +26,6 @@ This repository contains an implementation of the **MST++ (Multi-stage Spectral-
   
 ![Alt text](https://github.com/shaShvat07/mtp/blob/main/HSI%20image%20demo.png)
 
-* Annotations 
-
-![Alt text](https://github.com/shaShvat07/mtp/blob/main/annotation_rgb_and_hsi.png)
-
 * Training loss v/s iterations
 
 ![Alt text](https://github.com/shaShvat07/mtp/blob/main/lossVsiteration.png)
@@ -77,6 +73,40 @@ jupyter notebook index_hsi.ipynb
 Point the dataset path to your converted HSI `.mat` directory. Best weights are saved as `best_plant_hsi_disease.pth`. Training supports seamless resumption from interruptions via epoch-level checkpointing.
 
 ---
+
+## Results
+
+### RGB Classification — EfficientNet-B0
+> Test Accuracy: **98.46%** | Macro F1: **0.98**
+
+#### Training Loss vs Epochs
+![RGB Loss](result/rgb_loss.png)
+
+#### Training Accuracy vs Epochs
+![RGB Accuracy](result/rgb_accuracy.png)
+
+#### Confusion Matrix
+![RGB Confusion Matrix](result/rgb_confusion_matrix.png)
+
+#### Grad-CAM
+![RGB Grad-CAM](result/rgb_grad_cam.png)
+
+---
+
+### HSI Classification — HSI-EfficientNet
+> Test Accuracy: **90.22%** | Macro F1: **0.89** | Best Epoch: **88** | Early Stopping: **Epoch 95**
+
+#### Training Loss and Accuracy vs Epochs
+![HSI Training Curves](result/hsi_loss.png)
+
+#### Confusion Matrix
+![HSI Confusion Matrix](result/hsi_confusion_matrix.png)
+
+#### Grad-CAM + Spectral Band Importance
+![HSI Grad-CAM](result/hsi_gradcam.png)
+
+#### Global Spectral Band Importance
+![Global Spectral Band](result/global_spectral_band.png)
 
 ## References
 
