@@ -33,6 +33,25 @@ This repository contains an implementation of the **MST++ (Multi-stage Spectral-
 
 ## 🚀 Usage Guide
 
+## Dataset
+
+This project utilizes the [PlantVillage Dataset](https://www.kaggle.com/datasets/emmarex/plantdisease), a publicly available, open-access repository of images featuring healthy and diseased crop leaves. The original dataset serves as the foundational RGB baseline for our comparative training and synthetic Hyperspectral Imaging (HSI) dataset generation. 
+
+### Classes Used
+
+For this specific implementation and model training, a subset of 8 classes was selected from the broader dataset, focusing on grape, pepper bell, potato, and tomato leaves:
+
+*   Grape: Leaf Blight (Isariopsis Leaf Spot)
+*   Pepper Bell: Bacterial Spot
+*   Pepper Bell: Healthy
+*   Potato: Early Blight
+*   Potato: Late Blight
+*   Tomato: Early Blight
+*   Tomato: Late Blight
+*   Tomato: Healthy
+
+The dataset is taken from Plant village dataset 
+
 ### Training the MST++ Model
 
 To train the MST++ spectral reconstruction model:
