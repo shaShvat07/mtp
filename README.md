@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ---
 
 
-# MST++ Implementation and Annotation for Plant Disease Detection
+# MST++ Implementation for Plant Disease Detection
 
 This repository contains an implementation of the **MST++ (Multi-stage Spectral-wise Transformer)** for spectral reconstruction, applied to a potato leaf disease dataset. The project pipeline includes training the spectral reconstruction model and a comprehensive inference workflow that annotates RGB images, converts them to Hyperspectral Images (HSI), and visualizes bounding box annotations on both modalities.
 
