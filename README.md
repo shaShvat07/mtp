@@ -6,6 +6,11 @@
 
 ### Installation
 
+- index_hsi.ipynb -> Classfication model trained on hsi dataset
+- index.ipynb -> Classfication model trained on rgb dataset
+- mst_plus_plus_training/index.ipynb -> for training the mst++ model which is responsible to convert rgb images to hsi format
+- rgb_to_hsi_pipeline.ipynb -> this code is used to convert your batch/folder of rgb images to hsi images 
+
 ```bash
 git clone https://github.com/shaShvat07/mtp.git
 cd mtp
